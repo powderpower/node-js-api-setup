@@ -1,0 +1,26 @@
+{
+  "name": "api-node",
+  "version": "1.0.0",
+  "description": "Default nodeJS server setup",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "cross-env NODE_ENV=production node app.js"
+  },
+  "author": "Andrey Bogachevskiy",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "nodemailer": "^6.4.6",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "sequelize": "^5.21.6",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
