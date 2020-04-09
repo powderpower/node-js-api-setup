@@ -1,7 +1,8 @@
 const express       = require('express');
 const bodyParser    = require('body-parser');
 
-const sequelize = require('./utils/database');
+const sequelize = require('./database/setup');
+const relations = require('./database/relations');
 
 const ConfigService     = require('./helpers/ConfigService');
 const PORT              = ConfigService.getPort();
@@ -23,7 +24,9 @@ function initServer() {
         .listen(PORT, v => OutputManager.showServerInit(PORT));
 };
 
+relations.defineRelations();
+
 return sequelize
-    .sync()
+    .sync({force: true})
     .then(initServer);
 

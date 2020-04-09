@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database/setup');
 
-const User = sequelize.define('user', {
+const Roles = sequelize.define('roles', {
     id: {
         type: Sequelize.INTEGER(11).UNSIGNED,
         autoIncrement: true,
@@ -11,23 +11,15 @@ const User = sequelize.define('user', {
     name: {
         type: Sequelize.STRING(100),
         allowNull: false,
-    }, 
-    email: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-    },
-    password: {
-        type: Sequelize.STRING(11),
-        allowNull: false,
     },
 },
 {
     indexes: [
         {
             unique: true,
-            fields: ['email'],
+            fields: ['name'],
         }
     ],
 });
 
-module.exports = User;
+module.exports = Roles;
