@@ -10,9 +10,6 @@ const sequelize = new Sequelize(
        define: {
            underscored: true,
        },
-       dialectOptions: {
-           useUTC: false,
-       },
        timezone: '+03:00',
 });
 
