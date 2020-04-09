@@ -4,13 +4,15 @@ const db = require('../config/_db');
 const sequelize = new Sequelize(
    db.config.database,
    db.config.user,
-   db.config.password, {
+   db.config.password,
+   {
        dialect: 'mysql',
        host: db.config.host,
        define: {
            underscored: true,
        },
        timezone: '+03:00',
-});
+    }
+);
 
 module.exports = sequelize;

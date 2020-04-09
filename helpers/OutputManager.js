@@ -29,4 +29,18 @@ module.exports = class OutputManager
 
         return colors[color];
     }
+
+    /**
+     * Вывод в консоли информации
+     * о запуске сервера.
+     * 
+     * @param {void} port 
+     */
+    static showServerInit(port)
+    {
+        return console.log(
+                OutputManager.colorize('yellow'),
+                `Server started at PORT ${port}`
+            );
+    }
 }
