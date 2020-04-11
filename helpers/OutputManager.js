@@ -1,4 +1,5 @@
-const GREEN_COLOUR_OUPUT = "\x1b[33m%s\x1b[0m";
+const YELLOW_COLOUR_OUPUT   = "\x1b[33m";
+const GREEN_COLOUR_OUPUT    = "\x1b[32m";
 
 module.exports = class OutputManager
 {
@@ -10,7 +11,7 @@ module.exports = class OutputManager
     static colors()
     {
         return {
-            yellow: GREEN_COLOUR_OUPUT,
+            green: GREEN_COLOUR_OUPUT,
         };
     }
     
@@ -34,13 +35,15 @@ module.exports = class OutputManager
      * Вывод в консоли информации
      * о запуске сервера.
      * 
-     * @param {void} port 
+     * @param {void} port
+     * @param {string} item
+     * @param {color} color
      */
-    static showServerInit(port)
+    static showServerInit(port, item = 'Server', color = 'green')
     {
         return console.log(
-                OutputManager.colorize('yellow'),
-                `Server started at PORT ${port}`
+                OutputManager.colorize(color),
+                `${item} started at PORT ${port}`
             );
     }
 }

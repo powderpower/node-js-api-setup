@@ -30,4 +30,15 @@ module.exports = class ConfigService
 
         return config.DEV_APP_PORT;
     }
+
+    /**
+     * Возвращает порт
+     * запуска веб-сокетов.
+     * 
+     * @return {BigInteger}
+     */
+    static getSocketPort()
+    {
+        return config.WEB_SOCKET_PORT;
+    }
 }

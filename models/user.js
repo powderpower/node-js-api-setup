@@ -20,6 +20,11 @@ const User = sequelize.define('user', {
         type: Sequelize.STRING(11),
         allowNull: false,
     },
+    status: {
+        type: Sequelize.INTEGER(1).UNSIGNED,
+        allowNull: false,
+        defaultValue: '1',
+    }
 },
 {
     indexes: [

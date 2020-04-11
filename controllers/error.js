@@ -1,24 +1,41 @@
 const logger = require('../utils/logger');
 
+const ConfigService = require('../helpers/ConfigService');
+
+const errors = require('../config/errors');
+
 exports.throwNotFoud = (req, res) => {
-    return res.status(404)
+    return res.status(errors.CODE_NOT_FOUND)
         .json({
             error: 'Page not found',
         });
 };
 
 exports.throwBadRequest = (req, res) => {
-    return res.status(400)
+    return res.status(errors.CODE_BAD_REQUEST)
         .json({
             error: 'Access denied',
         });
 };
 
-exports.throwInternalServerError = (err, req, res, next) => {
-    logger.log('error', err.stack);
+exports.throwServerError = (err, req, res, next) => {
+    const status    = err.statusCode || errors.CODE_INTERNAL_SERVER_ERROR;
+
+    let message   = 'Internal server error';
+
+    if (status == errors.CODE_INTERNAL_SERVER_ERROR) {
+        logger.log('error', err.stack);
+    }
+
+    if (! ConfigService.isProduction()) {
+        message = err.message;
+    }
+
+    if (! res.headersSent) {
+        res.status(status);
+    }
     
-    return res.status(500)
-        .json({
-            error: 'Internal server error',
+    return res.json({
+            error: message,
         });
 }
