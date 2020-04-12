@@ -17,7 +17,7 @@ const User = sequelize.define('user', {
         allowNull: false,
     },
     password: {
-        type: Sequelize.STRING(11),
+        type: Sequelize.STRING(100),
         allowNull: false,
     },
     status: {
@@ -34,5 +34,13 @@ const User = sequelize.define('user', {
         }
     ],
 });
+
+User.findByEmail = function(email) {
+    return this.findOne({
+        where: {
+            email,
+        }
+    });
+}
 
 module.exports = User;

@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const commonConfig  = require('../config/_common');
-const errors        = require('../config/errors');
+const errors        = require('../config/codes');
+
+const validationManager = require('../utils/validationManager');
 
 /**
  * Добавление возможности создания
@@ -23,12 +25,7 @@ exports.provideCORS = (req, res, next) => {
 exports.authOnly = async (req, res, next) => {
     const authHeader = req.get('Authorization');
 
-    if (! authHeader) {
-        const error = new Error('Not authenticated.');
-        error.statusCode = errors.CODE_UNAUTHORIZED;
-
-        return next(error);
-    }
+    validationManager.provideAuthentication(authHeader, next);
     
     let decodedToken;
 
@@ -42,21 +39,11 @@ exports.authOnly = async (req, res, next) => {
         return next(err);
     }
 
-    if (! decodedToken) {
-        const error = new Error('Not authenticated.');
-        error.statusCode = errors.CODE_UNAUTHORIZED;
-
-        return next(error);
-    }
+    validationManager.provideAuthentication(decodedToken, next);
 
     const user = await User.findByPk(decodedToken.userId);
 
-    if (! user) {
-        const error = new Error('User not found.');
-        error.statusCode = errors.CODE_NOT_FOUND;
-
-        return next(error);
-    }
+    validationManager.provideModelCondition(user);
 
     req.user = user;
     
