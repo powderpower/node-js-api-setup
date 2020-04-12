@@ -18,7 +18,7 @@ const Roles = sequelize.define('roles', {
         {
             unique: true,
             fields: ['name'],
-        }
+        },
     ],
 });
 
