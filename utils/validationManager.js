@@ -45,8 +45,8 @@ exports.provideAuthentication = (condition) => {
         return null;
     }
 
-    const error = new Error('Аутентификация не выполнена');
-    error.statusCode = codes.CODE_UNAUTHORIZED;
+    const error         = new Error('Аутентификация не выполнена');
+    error.statusCode    = codes.CODE_UNAUTHORIZED;
 
     return error;
 }
@@ -54,13 +54,13 @@ exports.provideAuthentication = (condition) => {
 /**
  * Обработка наличия аутентификации.
  */
-exports.provideModelCondition = (condition) => {
+exports.provideModelCondition = (condition, errorData = 'Запрашиваемый объект не найден') => {
     if (condition) {
         return true;
     }
 
-    const error = new Error('Запрашиваемый объект не найден');
-    error.statusCode = codes.CODE_NOT_FOUND;
+    const error         = new Error(errorData);
+    error.statusCode    = codes.CODE_NOT_FOUND;
 
     throw error;
 }

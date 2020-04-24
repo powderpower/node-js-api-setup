@@ -27,7 +27,7 @@ exports.login = async (req, res, next) => {
 
     const user = await User.findByEmail(req.body.email);
 
-    validationManager.provideModelCondition(user);
+    validationManager.provideModelCondition(user, 'Пользователь не найден');
 
     const isOnMatch = await bcrypt.compare(req.body.password, user.password);
 
